@@ -24,7 +24,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         if (!employees.isEmpty()) {
             return employees;
         }
-        throw new EntityNotFoundException("No Employees found within this department" + departmentName);
+        throw new EntityNotFoundException("No Employees found within this department " + departmentName);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         if (!employees.isEmpty()) {
             return employees;
         }
-        throw new EntityNotFoundException("No Employees found with this salary condition" + salary);
+        throw new EntityNotFoundException("No Employees found with this salary condition " + salary);
     }
 
     @Override

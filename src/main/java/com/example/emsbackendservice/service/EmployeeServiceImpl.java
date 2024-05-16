@@ -1,7 +1,9 @@
 
 package com.example.emsbackendservice.service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -23,13 +25,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<EmployeeRecord> getEmployeesByDepartmentName(String departmentName) {
         List<Employee> employees = employeeDao.getEmployeesByDepartmentName(departmentName);
-        return EmployeeMapper.INSTACE.mapToList(employees);
+        List<Employee> sortedList = employees.stream()
+                                .sorted(Comparator.comparing(Employee::getName))
+                                .collect(Collectors.toList());
+        return EmployeeMapper.INSTACE.mapToList(sortedList);
     }
 
     @Override
     public List<EmployeeRecord> getEmployeesBySalary(Double salary, boolean toggle) {
         List<Employee> employees = employeeDao.getEmployeesBySalary(salary, toggle);
-        return EmployeeMapper.INSTACE.mapToList(employees);
+        List<Employee> sortedList = employees.stream()
+                                .sorted(Comparator.comparingDouble(Employee::getSalary))
+                                .collect(Collectors.toList());
+        return EmployeeMapper.INSTACE.mapToList(sortedList);
     }
 
     @Override
